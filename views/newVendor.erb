@@ -53,7 +53,7 @@
   function unlockAndSetForm() {
     FB.api('/me', function(response) {
       $("#fb_id").attr("value", response.id);
-      $("#name, #cuisine, #secret").attr("disabled", "false");
+      $("#name, #cuisine, #secret, #submit").prop("disabled", false);
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
     });
