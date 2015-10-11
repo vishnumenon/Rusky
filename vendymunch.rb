@@ -12,12 +12,6 @@ configure do
     varchar :cuisine
     varchar :secret
   end
-  DB.create_table! :users do
-    primary_key :id
-    varchar :name
-    varchar :username
-    varchar :password
-  end
   DB.create_table! :requests do
     primary_key :id
     float8 :latitude
@@ -27,7 +21,6 @@ configure do
   end
 end
 class Vendor < Sequel::Model; end
-class User < Sequel::Model; end
 class Request < Sequel::Model; end
 
 get '/' do
