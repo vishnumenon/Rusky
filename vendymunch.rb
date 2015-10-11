@@ -6,10 +6,10 @@ configure do
   DB = Sequel.connect(ENV['DATABASE_URL']);
   DB.create_table! :vendors do
     primary_key :id
+    uuid :fb_id
     varchar :name
     varchar :cuisine
-    varchar :username
-    varchar :password
+    varchar :secret
   end
   DB.create_table! :users do
     primary_key :id
@@ -37,5 +37,6 @@ get '/vendor/new' do
 end
 
 post '/vendor/new' do
+  Vendor.create(params);
   erb :vendorCreated
 end
