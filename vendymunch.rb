@@ -153,7 +153,7 @@ get '/centroid/:fbid' do
   rs.each { |r|
     people.push([r.latitude, r.longitude])
   }
-  centroid = kmeans(people, Math.max(people.length / 4, 1));
+  centroid = kmeans(people, [people.length / 4, 1].max);
   return {:latitude => centroid[0][0], :longitude => centroid[0][1]}.to_json
 end
 
