@@ -94,7 +94,11 @@
                  $mapPage = $(".mapPage[data-vendor=" + vendID +"]");
                  $mapPage.attr('id', 'map' + vendID);
 
-                 getLocation();
+                 if($mapPage.css('display') === 'block') {
+                   $mapPage.slideUp('slow', function() {$mapPage.innerHTML = ""});
+                 } else {
+                   getLocation();
+                 }
             });
 
 
