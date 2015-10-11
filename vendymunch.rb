@@ -5,8 +5,8 @@ require 'sinatra/sequel'
 
 #=== CENTROID CALCULATIONS
 
-def distance(p1,p2)
-	return Math.sqrt((p1[0]-p2[0])**2 + (p1[1]-p2[1])**2)
+def distance(x1,x2,y1,y2)
+	return Math.sqrt((x1-x2)**2 + (y1-y2)**2)
 end
 
 def centroidCalc(set)
@@ -19,93 +19,54 @@ def centroidCalc(set)
 	return [sumX.to_f/set.length,sumY.to_f/set.length]
 end
 
-
-def kmeans(people,ncluster)
+def kmeans(people)
 	peopleNumber=people.length
 	multiplier=[1,1]
 	personX=people[0][0]
 	personY=people[0][1]
-	centroid=[]
-	finalCentroid=[]
-	finalGroups=[]
+
 	for i in 0...peopleNumber
 		for k in 0...2
 			people[i][k]=people[i][k].abs
 		end
 	end
-
-
-	sizeOfCluster=peopleNumber/ncluster
-
-	finalGroups[0] = []
-	finalGroups[0].push(people[0])
-	#finalGroups[0][0]=people[0]
-
-	for i in 0...ncluster
-		finalGroups[i] = []
-		finalGroups[i].push(people[i*sizeOfCluster])
-	end
-	finalGroups[ncluster-1][0]=people[peopleNumber-1]
-
-	for x in 0...ncluster
-		finalCentroid[x]=finalGroups[x][0]
-	end
-
-
-
-	assignment=0
-	comparisonDist=0
-	replacementDist=0
-
-
+	groupOne=[people[0]]
+	groupTwo=[people[peopleNumber/2]]
+	centroid=[groupOne[0],groupTwo[0]]
 	for i in 0...peopleNumber
-		comparisonPoint=people[i]
-		for k in 0...ncluster
-			comparisonDist=distance(comparisonPoint,finalCentroid[k])
-			if(comparisonDist<replacementDist)
-				replacementDist=comparisonDist
-				assignment=k
-			end
-		end
-		finalGroups[k][finalGroups[k].length]=comparisonPoint
-		for o in 0...ncluster
-			finalCentroid[o]=centroidCalc(finalGroups[o])
-		end
-
-	end
-
-	for i in 0...ncluster
-		finalGroups[i].uniq!
-	end
-	for o in 0...ncluster
-			finalCentroid[o]=centroidCalc(finalGroups[o])
-		end
-
-	largestCluster=0
-	largest=0
-	for i in 0...ncluster
-		sizeTemp=finalGroups[i].length
-		if(largestCluster<sizeTemp)
-			largest=i
-			sizeTemp=largestCluster
+		if(distance(centroid[0][0],people[i][0],centroid[0][1],people[i][1]) < distance(centroid[1][0],people[i][0],centroid[1][1],people[i][0]))
+			groupOne[groupOne.length]=people[i]
+			centroid[0]=centroidCalc(groupOne)
+		else
+			groupTwo[groupTwo.length]=people[i]
+			centroid[1]=centroidCalc(groupTwo)
 		end
 	end
 
-	largestGrouping=finalGroups[largest]
+	for i in 0...groupOne.length
+		if(distance(centroid[0][0],groupOne[i][0],centroid[0][1],groupOne[i][1]) > distance(centroid[1][0],groupOne[i][0],centroid[1][1],groupOne[i][1]))
+			groupTwo[groupTwo.length]=groupOne[i]
+			groupOne.delete_at(i)
+		end
+	end
+
+	groupOne.delete_at(0)
+	groupTwo.delete_at(0)
+	centroid[0]=centroidCalc(groupOne)
+	centroid[1]=centroidCalc(groupTwo)
+
 	if personX<0
 		multiplier[0]=-1
 	end
 	if personY<0
 		multiplier[1]=-1
 	end
-
-	for i in 0...largestGrouping.length
-		largestGrouping[i][0]*=multiplier[0]
-		largestGrouping[i][1]*=multiplier[1]
+	for i in 0...centroid.length
+		centroid[i][0]*=multiplier[0]
+		centroid[i][1]*=multiplier[1]
 	end
 
-
-	return [finalCentroid[largest],largestGrouping]
+	return [centroid,groupOne,groupTwo]
 end
 
 #======= END CENTROID STUFF
@@ -113,14 +74,14 @@ Sequel::Model.plugin :json_serializer
 
 configure do
   DB = Sequel.connect(ENV['DATABASE_URL']);
-  DB.create_table! :vendors do
+  DB.create_table? :vendors do
     primary_key :id
     int8 :fb_id
     varchar :name
     varchar :cuisine
     varchar :secret
   end
-  DB.create_table! :requests do
+  DB.create_table? :requests do
     primary_key :id
     float8 :latitude
     float8 :longitude
@@ -154,13 +115,14 @@ get '/centroid/:fbid' do
     people.push([r.latitude, r.longitude])
   }
     puts people.to_s
-  centroid = kmeans(people, 1)#[people.length / 4, 1].max);
+    puts "KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
+  centroid = kmeans(people)
   puts "KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
   puts people.to_s
   puts "KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
   puts centroid.to_s
   puts "KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
-  return {:latitude => centroid[0][0], :longitude => centroid[0][1]}.to_json
+  return {:latitude => centroid[0][0][0], :longitude => centroid[0][0][1]}.to_json
 end
 
 post '/requests/new' do
