@@ -38,7 +38,7 @@ get '/requests/:id' do
   content_type :json
   reqs = DB.from(:requests)
   vendorReqs = reqs.where(:vendor => params["id"])
-  vendorReqs.to_json
+  vendorReqs.to_hash.to_json
 end
 
 post '/requests/new' do
