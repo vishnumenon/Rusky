@@ -5,7 +5,7 @@ source "https://rubygems.org"
 
 ruby '2.2.2'
 gem 'sinatra'
-gem 'sqlite3'
+#gem 'sqlite3'
 gem 'puma'
 gem 'thin'
-gem 'sequel'
+#gem 'sinatra-sequel'
