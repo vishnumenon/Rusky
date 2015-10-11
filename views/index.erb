@@ -92,7 +92,7 @@
                  e.stopPropagation();
                  vendID = $(this).attr("data-vendor");
                  $mapPage = $(".mapPage[data-vendor=" + vendID +"]");
-                 $mapPage.attr('id', 'map');
+                 $mapPage.attr('id', 'map' + vendID);
 
                  getLocation();
             });
@@ -127,13 +127,12 @@
             function showPosition(position) {
                 //alert(position.coords.latitude + "," + position.coords.longitude);
                   require(["esri/map", "dojo/domReady!"], function(Map) {
-                    map = new Map("map", {
+                    map = new Map($mapPage.attr('id'), {
                       basemap: "topo",  //For full list of pre-defined basemaps, navigate to http://arcg.is/1JVo6Wd
                       center: [position.coords.longitude,position.coords.latitude], // longitude, latitude
                       zoom: 16
                     })
                     });
-
                     $mapPage.slideDown( "slow" );
                   }
 

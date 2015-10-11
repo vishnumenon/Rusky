@@ -32,3 +32,8 @@
 .voted.unclicked {
   cursor: pointer;
 }
+
+
+.mapHolder {
+  cursor: pointer;
+}
