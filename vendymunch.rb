@@ -4,7 +4,7 @@ require 'sinatra/sequel'
 
 configure do
   DB = Sequel.connect(ENV['DATABASE_URL']);
-  DB.create_table! :vendors do
+  DB.create_table? :vendors do
     primary_key :id
     int8 :fb_id
     varchar :name
