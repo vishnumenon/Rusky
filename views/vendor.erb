@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vendy Munch - New Vendor</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/main.css">
+
+<script>
+  function statusChangeCallback(response) {
+    if (response.status === 'connected') {
+      unlockAndSetForm();
+    } else if (response.status === 'not_authorized') {
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
+    } else {
+            document.getElementById('status').innerHTML = 'Please log ' +
+              'into Facebook.';
+          }
+        }
+
+        // This function is called when someone finishes with the Login
+        // Button.  See the onlogin handler attached to it in the sample
+        // code below.
+        function checkLoginState() {
+          FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+          });
+        }
+
+        window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '974853599202506',
+          cookie     : true,
+          xfbml      : true,
+          version    : 'v2.2'
+        });
+
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+
+  };
+
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  function unlockAndSetForm() {
+    FB.api('/me', function(response) {
+      $("#fb_id").attr("value", response.id);
+      $("#name, #cuisine, #secret, #submit").prop("disabled", false);
+      document.getElementById('status').innerHTML =
+        'Thanks for logging in, ' + response.name + '!';
+    });
+  }
+</script>
+
+</head>
+<body>
+
+<div class="logo">VendyMunch</div>
+<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button>
+<br/><br/>
+<div class="bg-success" style="padding-top:10px; padding-bottom: 10px;">
+    <center><span id="status">Notification</span></center>
+</div>
+
+</body>
+</html>

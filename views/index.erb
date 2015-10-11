@@ -144,7 +144,7 @@
           <div class="voted">
             <header style="padding-left: 10px; padding-right: 10px;"><%= v[:name] %><span class="mapHolder" style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
               <div class="Desc" style="padding-left: 10px; padding-right: 10px; margin-bottom: 10px;"> <%= v[:cuisine] %> </div>
-              <div class="mapPage" style="z-index:-2; height: 250px;"></div>
+              <div class="mapPage" data-vendor=<%= v[:id] %> style="z-index:-2; height: 250px;"></div>
             </div>
     <% end %>
 
