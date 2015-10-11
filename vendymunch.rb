@@ -113,14 +113,14 @@ Sequel::Model.plugin :json_serializer
 
 configure do
   DB = Sequel.connect(ENV['DATABASE_URL']);
-  DB.create_table? :vendors do
+  DB.create_table! :vendors do
     primary_key :id
     int8 :fb_id
     varchar :name
     varchar :cuisine
     varchar :secret
   end
-  DB.create_table? :requests do
+  DB.create_table! :requests do
     primary_key :id
     float8 :latitude
     float8 :longitude
@@ -154,6 +154,11 @@ get '/centroid/:fbid' do
     people.push([r.latitude, r.longitude])
   }
   centroid = kmeans(people, 1)#[people.length / 4, 1].max);
+  puts "KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
+  puts people.to_s
+  puts "KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
+  puts centroid.to_s
+  puts "KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
   return {:latitude => centroid[0][0], :longitude => centroid[0][1]}.to_json
 end
 
