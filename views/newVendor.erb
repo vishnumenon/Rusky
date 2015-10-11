@@ -8,7 +8,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="/main.css">
 
 <script>
   function statusChangeCallback(response) {
@@ -73,9 +73,9 @@
     <center><span id="status"></span></center>
 </div>
 <div class="centeredModule">
-    <center><div> In order to create a food truck listing, you need to sign in via Facebook; <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button></div></center>
       	<h1 style="font-weight: 200; text-align: center; margin-top: 10px;">Create New Truck</h1>
+        <center><div> First, sign in via Facebook: <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+    </fb:login-button></div></center>
         <form action="/vendor/new" method="post" style="width: 170px; margin: auto;">
           Name: <br />
           <input id="name" class="form-control" name="name" type="text" disabled="true" style="width: 170px;">

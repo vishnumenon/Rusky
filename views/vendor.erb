@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vendy Munch - New Vendor</title>
+<title>Vendy Munch - Vendor View</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="/main.css">
+<link rel="stylesheet" href="main.css">
 
 <script>
   function statusChangeCallback(response) {
@@ -56,10 +56,34 @@
 
   function unlockAndSetForm() {
     FB.api('/me', function(response) {
-      $("#fb_id").attr("value", response.id);
-      $("#name, #cuisine, #secret, #submit").prop("disabled", false);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
+      $.get("/centroid/" + response.id, function(rs){
+        console.log(rs);
+          var map, textSymbol, picSymbol;
+require(["esri/map",
+"esri/graphic",
+"esri/symbols/PictureMarkerSymbol",
+"esri/symbols/TextSymbol",
+"esri/geometry/Point",
+"esri/SpatialReference",
+"esri/tasks/ProjectParameters",
+"esri/tasks/GeometryService",
+"dojo/on",
+"dojo/domReady!"
+], function (Map, Graphic, PictureMarkerSymbol, TextSymbol, Point, SpatialReference, ProjectParameters, GeometryService, on) {
+    map = new Map("map", {
+        basemap: "topo",
+        center: [rs.longitude,rs.latitude], // longitude, latitude
+        zoom: 16
+    });
+    picSymbol = new PictureMarkerSymbol('http://static.arcgis.com/images/Symbols/Shapes/BluePin1LargeB.png', 60, 60);
+    map.on("load", function (evt) {
+      //  for (var i = 0; i < rs.length; i++) {
+            var geometryPoint = new Point(rs.longitude, rs.latitude, new SpatialReference(4326));
+            map.graphics.add(new Graphic(geometryPoint, picSymbol));
+        //}
+    });
+});
+        });
     });
   }
 </script>
@@ -68,12 +92,20 @@
 <body>
 
 <div class="logo">VendyMunch</div>
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
 <br/><br/>
 <div class="bg-success" style="padding-top:10px; padding-bottom: 10px;">
-    <center><span id="status">Notification</span></center>
+    <center><span id="status"></span></center>
 </div>
-
+<div class="centeredModule">
+      	<h1 style="font-weight: 200; text-align: center; margin-top: 10px;">Create New Truck</h1>
+        <center><div><fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+    </fb:login-button></div></center>
+        <br />
+        <br />
+        <div id="map" class="roundedCorners"
+           data-dojo-type="dijit/layout/ContentPane"
+           data-dojo-props="region:'center'">
+    </div>
+</div>
 </body>
 </html>
