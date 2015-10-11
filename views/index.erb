@@ -67,6 +67,9 @@
     var mapDivOpen;
     $(document).ready(function(){
                 $( ".mapPage" ).hide();
+                $( ".mapPage" ).on('click', function(e){
+                  e.stopPropagation();
+                });
 
           $('.voted.unclicked').on('click', function() {
             $( this ).css( "background-color" ," #e67e22");

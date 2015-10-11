@@ -77,14 +77,14 @@ Sequel::Model.plugin :json_serializer
 
 configure do
   DB = Sequel.connect(ENV['DATABASE_URL']);
-  DB.create_table? :vendors do
+  DB.create_table! :vendors do
     primary_key :id
     int8 :fb_id
     varchar :name
     varchar :cuisine
     varchar :secret
   end
-  DB.create_table? :requests do
+  DB.create_table! :requests do
     primary_key :id
     float8 :latitude
     float8 :longitude
