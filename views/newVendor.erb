@@ -8,7 +8,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="/main.css">
+<link rel="stylesheet" href="main.css">
 
 <script>
   function statusChangeCallback(response) {
@@ -68,13 +68,13 @@
 <body>
 
 <div class="logo">VendyMunch</div>
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
 <br/><br/>
 <div class="bg-success" style="padding-top:10px; padding-bottom: 10px;">
-    <center><span id="status">Notification</span></center>
+    <center><span id="status"></span></center>
 </div>
 <div class="centeredModule">
+    <center><div> In order to create a food truck listing, you need to sign in via Facebook; <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button></div></center>
       	<h1 style="font-weight: 200; text-align: center; margin-top: 10px;">Create New Truck</h1>
         <form action="/vendor/new" method="post" style="width: 170px; margin: auto;">
           Name: <br />
@@ -87,7 +87,7 @@
           <input id="secret" class="form-control" name="secret" type="text" disabled="true" style="width: 170px;">
           <br />
           <input id="fb_id" name="fb_id" type="hidden">
-          <button id="submit" type="submit" class="btn btn-success" value="submit" disabled="true" style="float: right; ">Success</button>
+          <button id="submit" type="submit" class="btn btn-success" value="submit" disabled="true" style="float: right; ">Create</button>
         </form>
 </div>
 </body>
