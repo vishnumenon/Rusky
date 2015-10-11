@@ -29,6 +29,7 @@ class User < Sequel::Model; end
 class Request < Sequel::Model; end
 
 get '/' do
+  allVendors = Vendor.all
   erb :index
 end
 
