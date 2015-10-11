@@ -150,7 +150,7 @@
       "dojo/on",
       "dojo/domReady!"
           ], function (Map, Graphic, PictureMarkerSymbol, TextSymbol, Point, SpatialReference, ProjectParameters, GeometryService, on) {
-              map = new Map("map", {
+              map = new Map($mapPage.attr('id'), {
                   basemap: "topo",
                   center: [position.coords.longitude,position.coords.latitude], // longitude, latitude
                   zoom: 16
