@@ -151,7 +151,7 @@ get '/centroid/:fbid' do
   rs = Request.filter(:vendor => myVID)
   people=[];
   rs.each { |r|
-    people.push([r.x, r.y])
+    people.push([r.latitude, r.longitude])
   }
   centroid = kmeans(people, Math.max(people.length / 4, 1));
   return {:latitude => centroid[0][0], :longitude => centroid[0][1]}.to_json
