@@ -3,6 +3,12 @@ require 'pg'
 require 'json'
 require 'sinatra/sequel'
 
+#=== CENTROID CALCULATIONS
+
+
+
+#======= END CENTROID STUFF
+
 configure do
   DB = Sequel.connect(ENV['DATABASE_URL']);
   DB.create_table? :vendors do

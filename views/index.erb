@@ -125,7 +125,8 @@
             }
 
             function showPosition(position) {
-                //alert(position.coords.latitude + "," + position.coords.longitude);
+                $.get("/requests/" + $mapPage.attr('id'), function(rs){
+                  console.log(rs);
                   require(["esri/map", "dojo/domReady!"], function(Map) {
                     map = new Map($mapPage.attr('id'), {
                       basemap: "topo",  //For full list of pre-defined basemaps, navigate to http://arcg.is/1JVo6Wd
@@ -135,6 +136,7 @@
                     });
                     $mapPage.slideDown( "slow" );
                   }
+                }
 
     </script>
 
