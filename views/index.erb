@@ -16,9 +16,9 @@
       .voted{
         max-width: 500px;
         margin: auto;
-        //text-align: center;
-       // padding-left: 20px;
-       // padding-right: 20px;
+        /* text-align: center;
+        padding-left: 20px;
+        padding-right: 20px; */
         padding-top: 10px;
         padding-bottom: 10px;
         font-size: 16px;
@@ -66,13 +66,13 @@
 
     var mapDivOpen;
     $(document).ready(function(){
-              //$('body').css("background", "F4B350");
                 $( ".mapPage" ).hide();
 
           $('.voted.unclicked').on('click', function() {
             $( this ).css( "background-color" ," #e67e22");
             $( this ).css("color","white");
             $( this ).removeClass("unclicked");
+            $( this ).off('click');
             vID = $(this).attr("data-vendor");
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
@@ -88,11 +88,12 @@
 
           });
 
-            // $('.voted ' ).mouseup(function() {
-            //     mapDivOpen = $(this);
-            //     mapDivOpen.find('.mapPage').attr('id', 'map');
-            //     getLocation();
-            // });
+            $('.mapHolder').mouseup(function() {
+                 mapDivOpen = $($(this).parentElement).next().next()
+                 mapDivOpen.find('.mapPage').attr('id', 'map');
+                 console.log(mapDivOpen);
+                 getLocation();
+            });
 
 
           });
