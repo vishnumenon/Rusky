@@ -91,9 +91,9 @@
             $('.voted .mapHolder').on('click', function(e) {
                  e.stopPropagation();
                  vendID = $(this).attr("data-vendor");
-                 mapPage = $(".mapPage[data-vendor=" + vendID +"]");
-                 mapPage.attr('id', 'map');
-                 console.log(mapPage);
+                 $mapPage = $(".mapPage[data-vendor=" + vendID +"]");
+                 $mapPage.attr('id', 'map');
+
                  getLocation();
             });
 
@@ -134,7 +134,7 @@
                     })
                     });
 
-                    $(mapDivOpen).find('.mapPage').slideDown( "slow" );
+                    $mapPage.slideDown( "slow" );
                   }
 
     </script>
