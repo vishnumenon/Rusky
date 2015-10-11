@@ -7,4 +7,4 @@ The user simply requests that a food truck come to his location. All of the requ
 food trucks to set up shop based on user data.
 
 =============
-A project by Vishnu Menon, Brian, Wilfred Wong, and Dmitry Pustovit 
+A project by Vishnu Menon, Brian Jiang, Wilfred Wong, and Dmitry Pustovit 
