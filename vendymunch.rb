@@ -4,7 +4,6 @@ require 'sinatra/sequel'
 
 configure do
   DB = Sequel.connect(ENV['DATABASE_URL']);
-  DB.
   DB.create_table! :vendors do
     primary_key :id
     varchar :name
