@@ -153,6 +153,7 @@ get '/centroid/:fbid' do
   rs.each { |r|
     people.push([r.latitude, r.longitude])
   }
+    puts people.to_s
   centroid = kmeans(people, 1)#[people.length / 4, 1].max);
   puts "KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
   puts people.to_s
