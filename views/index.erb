@@ -161,21 +161,15 @@
         <button type="button" class="btn btn-success btn-lg" style="float: right;" onclick="setCookie()">Got it!</button></div>
     </div>
 
-<<<<<<< HEAD
+
     <div class="mapPage" style="display:none; z-index:5;"><div id="map"></div></div>
 
+<% for v in allVendors %>
     <div class="voted" i="t1">
-      <% for v in allVendors %>
             <header><%= v[:name] %><span class="mapHolder" style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
               <div class="Desc"> <%= v[:cuisine] %> </div>
-      <% end %>
-=======
-    <div class="voted">
-            <header style="padding-left: 10px; padding-right: 10px;"> <%= allVendors[0][:name] %> Cooking <span class="mapHolder" style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
-              <div class="Desc" style="padding-left: 10px; padding-right: 10px; margin-bottom: 10px;"> Quick food whereever you want. </div>
-            <div class="mapPage" style=" z-index:-2; height: 250px;"></div>
->>>>>>> origin/master
     </div>
+    <% end %>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </body>
