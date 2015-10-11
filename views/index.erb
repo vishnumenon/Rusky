@@ -88,7 +88,7 @@
 
           });
 
-            $('.voted .mapHolder').mouseup(function(e) {
+            $('.voted .mapHolder').on('click', function(e) {
                  e.stopPropagation();
                  vendID = $(this).attr("data-vendor");
                  mapPage = $(".mapPage[data-vendor=" + vendID +"]");
