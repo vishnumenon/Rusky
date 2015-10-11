@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Rusky</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Titillium+Web:200,300' rel='stylesheet' type='text/css'>
     <style>
       body{
@@ -16,6 +17,7 @@
         font-weight: 300;
         background: white;
         color: black;
+        font-size: 18px;
       }
       .logo{
         font-family: 'Titillium Web', sans-serif;
@@ -46,15 +48,52 @@
 
         font-size: 26px;
       }
+      .votedE header{
+
+        font-size: 26px;
+      }
+
+      .text{
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .bg-primary{
+        margin-bottom: 0 !important;
+        padding-left: 20px;
+        padding-right: 20px;
+        max-width: 500px;
+        margin: auto;
+        background: none;
+      }
     </style>
     <script>
-$(document).ready(function(){
+
+    $(document).ready(function(){
+              //$('body').css("background", "F4B350");
+
           $('.voted' ).mouseup(function() {
             $( this ).css( "background-color" ," #27ae60");
             $( this ).css("color","white");
               console.log("Yay");
             });
           });
+
+          $(document).ready(function() {
+            if ($.cookie('name') == 'value') {
+
+              $('.bg-primary').hide();
+            $('body').css("background-color","white");
+              //$('body').css("background-color","blue");
+            } else {
+              $('.voted').hide();
+            }
+          });
+
+          function setCookie(){
+            $.cookie('name', 'value');
+            location.reload();
+          }
     </script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -67,6 +106,10 @@ $(document).ready(function(){
   <body>
     <div class="logo">Rusky.io</div>
     <br/><br/>
+
+    <div class="bg-primary" style="color: black;"> <h1 style="margin-bottom:10px; margin-top: 0; padding-top: 10px; font-size: 30px;"> A Quick How To :</h1> To request a vender to relocate near you, simply press on the vender in the list below. To cancel the request, press on the vendors name again. <br/> <br/> To view the current location of a vendor, slide the vendors name to the left. <br/><br/>
+        <button type="button" class="btn btn-success btn-lg" style="float: right;" onclick="setCookie()">Got it!</button></div>
+    </div>
 
     <div class="voted" i="t1">
     <header> Rusky's Cooking </header>
