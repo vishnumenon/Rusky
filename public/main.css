@@ -29,6 +29,6 @@
         margin: auto;
     }
 
-.voted, .unclicked {
+.voted.unclicked {
   cursor: pointer;
 }
