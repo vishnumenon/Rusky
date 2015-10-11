@@ -137,33 +137,16 @@
 
     <div class="bg-primary" style="color: black;"> <h1 style="margin-bottom:10px; margin-top: 0; padding-top: 10px; font-size: 30px;"> A Quick How To :</h1> To request a vender to relocate near you, simply press on the vender in the list below. To cancel the request, press on the vendors name again. <br/> <br/> To view the current location of a vendor, slide the vendors name to the left. <br/><br/>
         <button type="button" class="btn btn-success btn-lg" style="float: right;" onclick="setCookie()">Got it!</button></div>
-    </div>
 
-    <div class="mapPage" style="display:none; z-index:5;"><div id="map"></div></div>
+
 
 <% for v in allVendors %>
-    <div class="voted" i="t1">
-            <header><%= v[:name] %><span class="mapHolder" style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
-              <div class="Desc"> <%= v[:cuisine] %> </div>
-    </div>
+          <div class="voted">
+            <header style="padding-left: 10px; padding-right: 10px;"><%= v[:name] %><span class="mapHolder" style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
+              <div class="Desc" style="padding-left: 10px; padding-right: 10px; margin-bottom: 10px;"> <%= v[:cuisine] %> </div>
+              <div class="mapPage" style="z-index:-2; height: 250px;"></div>
+            </div>
     <% end %>
-
-        <div class="voted">
-            <header style="padding-left: 10px; padding-right: 10px;"> Rusky's Cooking <span class="mapHolder" style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
-              <div class="Desc" style="padding-left: 10px; padding-right: 10px; margin-bottom: 10px;"> Quick food whereever you want. </div>
-            <div class="mapPage" style=" z-index:-2; height: 250px;"></div>
-    </div>
-        <div class="voted">
-            <header style="padding-left: 10px; padding-right: 10px;"> Rusky's Cooking <span class="mapHolder" style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
-              <div class="Desc" style="padding-left: 10px; padding-right: 10px; margin-bottom: 10px;"> Quick food whereever you want. </div>
-            <div class="mapPage" style=" z-index:-2; height: 250px;"></div>
-    </div>
-        <div class="voted">
-            <header style="padding-left: 10px; padding-right: 10px;"> Rusky's Cooking <span class="mapHolder" style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
-              <div class="Desc" style="padding-left: 10px; padding-right: 10px; margin-bottom: 10px;"> Quick food whereever you want. </div>
-            <div class="mapPage" style=" z-index:-2; height: 250px;"></div>
-    </div>
-
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </body>
