@@ -69,18 +69,30 @@
               //$('body').css("background", "F4B350");
                 $( ".mapPage" ).hide();
 
-          //$('.voted ' ).mouseup(function() {
-            //$( this ).css( "background-color" ," #e67e22");
-            //$( this ).css("color","white");
-              //getLocation();
-              //console.log("Yay");
-            //});
+          $('.voted unclicked').mouseup(function() {
+            $( this ).css( "background-color" ," #e67e22");
+            $( this ).css("color","white");
+            $( this ).removeClass("unclicked");
+            vID = $(this).attr("data-vendor");
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                  function(pos) {
+                    $.post("/requests/new", {latitude: pos.coords.latitude, longitude: pos.coords.longitude, vendor: vID}, function(s) {
+                      alert("Request successfully made!");
+                    });
+                  }
+                );
+            } else {
+                //x.innerHTML = "Geolocation is not supported by this browser.";
+            }
 
-            $('.voted ' ).mouseup(function() {
-                mapDivOpen = $(this);
-                mapDivOpen.find('.mapPage').attr('id', 'map');
-                getLocation();
-            });
+          });
+
+            // $('.voted ' ).mouseup(function() {
+            //     mapDivOpen = $(this);
+            //     mapDivOpen.find('.mapPage').attr('id', 'map');
+            //     getLocation();
+            // });
 
 
           });
@@ -141,7 +153,7 @@
 
 
 <% for v in allVendors %>
-          <div class="voted">
+          <div class="voted unclicked" data-vendor=<%= v[:id] %>>
             <header style="padding-left: 10px; padding-right: 10px;"><%= v[:name] %><span class="mapHolder" style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
               <div class="Desc" style="padding-left: 10px; padding-right: 10px; margin-bottom: 10px;"> <%= v[:cuisine] %> </div>
               <div class="mapPage" data-vendor=<%= v[:id] %> style="z-index:-2; height: 250px;"></div>

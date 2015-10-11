@@ -16,7 +16,6 @@ configure do
     primary_key :id
     float8 :latitude
     float8 :longitude
-    varchar :username
     int8 :vendor
   end
 end
