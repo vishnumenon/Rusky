@@ -88,10 +88,12 @@
 
           });
 
-            $('.mapHolder').mouseup(function() {
-                 mapDivOpen = $($(this).parentElement).next().next()
-                 mapDivOpen.find('.mapPage').attr('id', 'map');
-                 console.log(mapDivOpen);
+            $('.voted .mapHolder').mouseup(function(e) {
+                 e.stopPropagation();
+                 vendID = $(this).attr("data-vendor");
+                 mapPage = $(".mapPage[data-vendor=" + vendID +"]");
+                 mapPage.attr('id', 'map');
+                 console.log(mapPage);
                  getLocation();
             });
 
@@ -155,7 +157,7 @@
 
 <% for v in allVendors %>
           <div class="voted unclicked" data-vendor=<%= v[:id] %>>
-            <header style="padding-left: 10px; padding-right: 10px;"><%= v[:name] %><span class="mapHolder" style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
+            <header style="padding-left: 10px; padding-right: 10px;"><%= v[:name] %><span class="mapHolder" data-vendor=<%= v[:id] %> style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
               <div class="Desc" style="padding-left: 10px; padding-right: 10px; margin-bottom: 10px;"> <%= v[:cuisine] %> </div>
               <div class="mapPage" data-vendor=<%= v[:id] %> style="z-index:-2; height: 250px;"></div>
             </div>
