@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'pg'
+require 'json'
 require 'sinatra/sequel'
 
 configure do
@@ -22,6 +23,7 @@ configure do
     float8 :latitude
     float8 :longitude
     varchar :username
+    int8 :vendor
   end
 end
 class Vendor < Sequel::Model; end
@@ -34,11 +36,28 @@ get '/' do
   erb :index, :locals => {:allVendors => allV}
 end
 
+get '/requests/:id' do
+  content_type :json
+  reqs = DB.from(:requests)
+  vendorReqs = reqs.where(:vendor => params["id"])
+  vendorReqs.to_json
+end
+
+post '/requests/new' do
+  content_type :json
+  Request.create(params)
+  {"status" => "success"}.to_json
+end
+
 get '/vendor/new' do
   erb :newVendor
 end
 
 post '/vendor/new' do
   Vendor.create(params);
-  erb :vendorCreated
+  erb :vendor
+end
+
+get '/vendor' do
+  erb :vendor
 end
