@@ -30,7 +30,7 @@ class Request < Sequel::Model; end
 
 get '/' do
   vendors = DB.from(:vendors)
-  allvendors = vendors.all
+  allVendors = vendors.all
   erb :index
 end
 
