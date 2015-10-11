@@ -6,7 +6,7 @@ configure do
   DB = Sequel.connect(ENV['DATABASE_URL']);
   DB.create_table! :vendors do
     primary_key :id
-    uuid :fb_id
+    int8 :fb_id
     varchar :name
     varchar :cuisine
     varchar :secret
