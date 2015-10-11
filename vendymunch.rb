@@ -1,20 +1,23 @@
 require 'sinatra'
-#require 'sinatra/sequel'
-# 
-# DB = Sequel.sqlite
-# DB.create_table :trucks do
-#   primary_key :id
-#   varchar :name
-#   varchar :cuisine
-#   varchar :username
-#   varchar :password
-# end
-# class Link < Sequel::Model; end
+require 'pg'
+require 'sinatra/sequel'
 
-get '/truck/new' do
-  erb :registerTruck
+configure do
+  DB = Sequel.connect(ENV['DATABASE_URL']);
+  DB.create_table :trucks do
+    primary_key :id
+    varchar :name
+    varchar :cuisine
+    varchar :username
+    varchar :password
+  end
+end
+class Link < Sequel::Model; end
+
+get '/vendor/new' do
+  erb :registerVendor
 end
 
-post '/truck/new' do
-  erb :truckCreated
+post '/vendor/new' do
+  erb :vendorCreated
 end
