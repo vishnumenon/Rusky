@@ -33,7 +33,7 @@ get '/' do
 end
 
 get '/vendor/new' do
-  erb :registerVendor
+  erb :newVendor
 end
 
 post '/vendor/new' do
