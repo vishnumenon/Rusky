@@ -12,7 +12,7 @@ configure do
     varchar :password
   end
 end
-class Link < Sequel::Model; end
+class Vendor < Sequel::Model; end
 
 get '/' do
   erb :index
