@@ -65,8 +65,11 @@ def kmeans(people)
 		centroid[i][0]*=multiplier[0]
 		centroid[i][1]*=multiplier[1]
 	end
-
-	return [centroid,groupOne,groupTwo]
+  if(groupOne.length > groupTwo.length)
+    return centroid[0]
+  else
+    return centroid[1]
+  end
 end
 
 #======= END CENTROID STUFF
@@ -122,7 +125,7 @@ get '/centroid/:fbid' do
   puts "KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
   puts centroid.to_s
   puts "KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK"
-  return {:latitude => centroid[0][0][0], :longitude => centroid[0][0][1]}.to_json
+  return {:latitude => centroid[0], :longitude => centroid[1]}.to_json
 end
 
 post '/requests/new' do
