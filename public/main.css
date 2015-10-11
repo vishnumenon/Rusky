@@ -28,3 +28,7 @@
         max-width: 400px;
         margin: auto;
     }
+
+.voted, .unclicked {
+  cursor: pointer;
+}
