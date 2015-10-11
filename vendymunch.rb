@@ -23,6 +23,7 @@ configure do
     float8 :latitude
     float8 :longitude
     varchar :username
+  end
 end
 class Vendor < Sequel::Model; end
 class User < Sequel::Model; end
