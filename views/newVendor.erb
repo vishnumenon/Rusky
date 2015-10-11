@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>New Vendor</title>
-<meta charset="UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vendy Munch - New Vendor</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
-</head>
-<body>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="main.css">
+
 <script>
   function statusChangeCallback(response) {
     if (response.status === 'connected') {
@@ -60,24 +64,31 @@
   }
 </script>
 
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
+</head>
+<body>
 
-<div id="status">
+<div class="logo">VendyMunch</div>
+<!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button> -->
+<br/><br/>
+<div class="bg-success" style="padding-top:10px; padding-bottom: 10px;">
+    <center><span id="status">Notification</span></center>
 </div>
-	<h1>Create New Truck</h1>
-  <form action="/vendor/new" method="post">
-    Name: <br />
-    <input id="name" name="name" type="text" disabled="true">
-    <br />
-    Cuisine: <br />
-    <input id="cuisine" name="cuisine" type="text" disabled="true">
-    <br />
-    Secret: <br />
-    <input id="secret" name="secret" type="text" disabled="true">
-    <br />
-    <input id="fb_id" name="fb_id" type="hidden">
-    <input id="submit" type="submit" value="submit" disabled="true">
-  </form>
+<div class="centeredModule">
+      	<h1 style="font-weight: 200; text-align: center; margin-top: 10px;">Create New Truck</h1>
+        <form action="/vendor/new" method="post" style="width: 170px; margin: auto;">
+          Name: <br />
+          <input id="name" class="form-control" name="name" type="text" disabled="true" style="width: 170px;">
+          <br />
+          Cuisine: <br />
+          <input id="cuisine" class="form-control" name="cuisine" type="text" disabled="true" style="width: 170px;">
+          <br />
+          Secret: <br />
+          <input id="secret" class="form-control" name="secret" type="text" disabled="true" style="width: 170px;">
+          <br />
+          <input id="fb_id" name="fb_id" type="hidden">
+          <button id="submit" type="submit" class="btn btn-success" value="submit" disabled="true" style="float: right; ">Success</button>
+        </form>
+</div>
 </body>
 </html>

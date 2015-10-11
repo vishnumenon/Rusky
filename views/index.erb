@@ -10,31 +10,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
       <script src="http://js.arcgis.com/3.14/"></script>
       <link rel="stylesheet" href="http://js.arcgis.com/3.14/esri/css/esri.css">
-    <link href='https://fonts.googleapis.com/css?family=Titillium+Web:200,300' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" href="main.css">
     <style>
-      body{
-        padding: 0;
-        margin: 0;
-        font-family: 'Titillium Web', sans-serif;
-        font-weight: 300;
-        background: white;
-        color: black;
-        font-size: 18px;
-      }
-      .logo{
-        font-family: 'Titillium Web', sans-serif;
-        font-weight: 300;
-        font-size: 30px;
-        //color: #34495e;
-        color:white;
-        text-align: center;
-        background: #e74c3c;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        padding-top: 5px;
-        padding-bottom: 5px;
-      }
+
       .voted{
         max-width: 500px;
         margin: auto;
@@ -73,15 +51,15 @@
          transform: translate(-50%,-50%);
         -webkit-transform: translate(-50%,-50%);
       }
-    
+
     #map_container{
         z-index: -5;
     }
-        
+
    #map_zoom_slider{
         z-index: -5 !important;
     }
-        
+
 
     </style>
     <script>
@@ -103,8 +81,8 @@
                 mapDivOpen.find('.mapPage').attr('id', 'map');
                 getLocation();
             });
-        
-        
+
+
           });
 
           $(document).ready(function() {
@@ -122,7 +100,7 @@
             $.cookie('HasVisted', 'yes');
             location.reload();
           }
-        
+
             function getLocation() {
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(showPosition);
@@ -130,7 +108,7 @@
                     //x.innerHTML = "Geolocation is not supported by this browser.";
                 }
             }
-        
+
             function showPosition(position) {
                 //alert(position.coords.latitude + "," + position.coords.longitude);
                   require(["esri/map", "dojo/domReady!"], function(Map) {
@@ -140,7 +118,7 @@
                       zoom: 16
                     })
                     });
-                      
+
                     $(mapDivOpen).find('.mapPage').slideDown( "slow" );
                   }
 
@@ -162,10 +140,27 @@
     </div>
 
     <div class="voted">
-            <header style="padding-left: 10px; padding-right: 10px;"> <%= allVendors[0][:name] %> Cooking <span class="mapHolder" style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
+            <header style="padding-left: 10px; padding-right: 10px;"> Rusky's Cooking <span class="mapHolder" style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
               <div class="Desc" style="padding-left: 10px; padding-right: 10px; margin-bottom: 10px;"> Quick food whereever you want. </div>
             <div class="mapPage" style=" z-index:-2; height: 250px;"></div>
     </div>
+
+        <div class="voted">
+            <header style="padding-left: 10px; padding-right: 10px;"> Rusky's Cooking <span class="mapHolder" style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
+              <div class="Desc" style="padding-left: 10px; padding-right: 10px; margin-bottom: 10px;"> Quick food whereever you want. </div>
+            <div class="mapPage" style=" z-index:-2; height: 250px;"></div>
+    </div>
+        <div class="voted">
+            <header style="padding-left: 10px; padding-right: 10px;"> Rusky's Cooking <span class="mapHolder" style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
+              <div class="Desc" style="padding-left: 10px; padding-right: 10px; margin-bottom: 10px;"> Quick food whereever you want. </div>
+            <div class="mapPage" style=" z-index:-2; height: 250px;"></div>
+    </div>
+        <div class="voted">
+            <header style="padding-left: 10px; padding-right: 10px;"> Rusky's Cooking <span class="mapHolder" style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
+              <div class="Desc" style="padding-left: 10px; padding-right: 10px; margin-bottom: 10px;"> Quick food whereever you want. </div>
+            <div class="mapPage" style=" z-index:-2; height: 250px;"></div>
+    </div>
+
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </body>
