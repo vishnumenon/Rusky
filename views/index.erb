@@ -131,13 +131,38 @@
             function showPosition(position) {
                 $.get("/requests/" + vendID, function(rs){
                   console.log(rs);
-                  require(["esri/map", "dojo/domReady!"], function(Map) {
-                    map = new Map($mapPage.attr('id'), {
-                      basemap: "topo",  //For full list of pre-defined basemaps, navigate to http://arcg.is/1JVo6Wd
-                      center: [position.coords.longitude,position.coords.latitude], // longitude, latitude
-                      zoom: 16
-                    })
-                    });
+                  // require(["esri/map", "dojo/domReady!"], function(Map) {
+                  //   map = new Map($mapPage.attr('id'), {
+                  //     basemap: "topo",  //For full list of pre-defined basemaps, navigate to http://arcg.is/1JVo6Wd
+                  //     center: [position.coords.longitude,position.coords.latitude], // longitude, latitude
+                  //     zoom: 16
+                  //   })
+                  //   });
+                    var map, textSymbol, picSymbol;
+          require(["esri/map",
+      "esri/graphic",
+      "esri/symbols/PictureMarkerSymbol",
+      "esri/symbols/TextSymbol",
+      "esri/geometry/Point",
+      "esri/SpatialReference",
+      "esri/tasks/ProjectParameters",
+      "esri/tasks/GeometryService",
+      "dojo/on",
+      "dojo/domReady!"
+          ], function (Map, Graphic, PictureMarkerSymbol, TextSymbol, Point, SpatialReference, ProjectParameters, GeometryService, on) {
+              map = new Map("map", {
+                  basemap: "topo",
+                  center: [position.coords.longitude,position.coords.latitude], // longitude, latitude
+                  zoom: 16
+              });
+              picSymbol = new PictureMarkerSymbol('http://static.arcgis.com/images/Symbols/Shapes/BluePin1LargeB.png', 60, 60);
+              map.on("load", function (evt) {
+                  for (var i = 0; i < rs.length; i++) {
+                      var geometryPoint = new Point(rs[i].longitude, rs[i].latitude, new SpatialReference(4326));
+                      map.graphics.add(new Graphic(geometryPoint, picSymbol));
+                  }
+              });
+          });
                     $mapPage.slideDown( "slow" );
                   });
                 }
