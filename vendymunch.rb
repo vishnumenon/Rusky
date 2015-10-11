@@ -4,15 +4,29 @@ require 'sinatra/sequel'
 
 configure do
   DB = Sequel.connect(ENV['DATABASE_URL']);
-  DB.create_table :trucks do
+  DB.
+  DB.create_table! :vendors do
     primary_key :id
     varchar :name
     varchar :cuisine
     varchar :username
     varchar :password
   end
+  DB.create_table! :users do
+    primary_key :id
+    varchar :name
+    varchar :username
+    varchar :password
+  end
+  DB.create_table! :requests do
+    primary_key :id
+    float8 :latitude
+    float8 :longitude
+    varchar :username
 end
 class Vendor < Sequel::Model; end
+class User < Sequel::Model; end
+class Request < Sequel::Model; end
 
 get '/' do
   erb :index
