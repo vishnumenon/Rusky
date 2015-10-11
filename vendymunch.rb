@@ -40,7 +40,7 @@ get '/requests/:id' do
   # reqs = DB.from(:requests)
   # vendorReqs = reqs.where(:vendor => params["id"])
   # vendorReqs.to_hash.to_json
-  Request.filter(:vendor => params["id"]).to_json
+  Request.filter(:vendor => params["id"].to_i).to_json
 end
 
 post '/requests/new' do

@@ -125,7 +125,7 @@
             }
 
             function showPosition(position) {
-                $.get("/requests/" + $mapPage.attr('id'), function(rs){
+                $.get("/requests/" + vendID, function(rs){
                   console.log(rs);
                   require(["esri/map", "dojo/domReady!"], function(Map) {
                     map = new Map($mapPage.attr('id'), {
