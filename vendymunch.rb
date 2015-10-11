@@ -120,7 +120,7 @@ configure do
     varchar :cuisine
     varchar :secret
   end
-  DB.create_table! :requests do
+  DB.create_table? :requests do
     primary_key :id
     float8 :latitude
     float8 :longitude
@@ -144,6 +144,19 @@ get '/requests/:id' do
   Request.filter(:vendor => params["id"].to_i).to_json
 end
 
+get '/centroid/:fbid' do
+  content_type :json
+  v = Vendor.filter(:fb_id => params[:fbid]).first
+  myVID = v[:id]
+  rs = Request.filter(:vendor => myVID)
+  people=[];
+  rs.each { |r|
+    people.push([r.x, r.y])
+  }
+  centroid = kmeans(people, Math.max(people.length / 4, 1));
+  return {:latitude => centroid[0][0], :longitude => centroid[0][1]}.to_json
+end
+
 post '/requests/new' do
   content_type :json
   Request.create(params)
@@ -160,5 +173,6 @@ post '/vendor/new' do
 end
 
 get '/vendor' do
+  relevantReqs = Request.filter(:vendor => params["id"].to_i)
   erb :vendor
 end
