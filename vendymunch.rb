@@ -5,7 +5,108 @@ require 'sinatra/sequel'
 
 #=== CENTROID CALCULATIONS
 
+def distance(p1,p2)
+	return Math.sqrt((p1[0]-p2[0])**2 + (p1[1]-p2[1])**2)
+end
 
+def centroidCalc(set)
+	sumX=0
+	sumY=0
+	for i in 0...set.length
+		sumX+=set[i][0]
+		sumY+=set[i][1]
+	end
+	return [sumX.to_f/set.length,sumY.to_f/set.length]
+end
+
+
+def kmeans(people,ncluster)
+	peopleNumber=people.length
+	multiplier=[1,1]
+	personX=people[0][0]
+	personY=people[0][1]
+	centroid=[]
+	finalCentroid=[]
+	finalGroups=[]
+	for i in 0...peopleNumber
+		for k in 0...2
+			people[i][k]=people[i][k].abs
+		end
+	end
+
+
+	sizeOfCluster=peopleNumber/ncluster
+
+	finalGroups[0] = []
+	finalGroups[0].push(people[0])
+	#finalGroups[0][0]=people[0]
+
+	for i in 0...ncluster
+		finalGroups[i] = []
+		finalGroups[i].push(people[i*sizeOfCluster])
+	end
+	finalGroups[ncluster-1][0]=people[peopleNumber-1]
+
+	for x in 0...ncluster
+		finalCentroid[x]=finalGroups[x][0]
+	end
+
+
+
+	assignment=0
+	comparisonDist=0
+	replacementDist=0
+
+
+	for i in 0...peopleNumber
+		comparisonPoint=people[i]
+		for k in 0...ncluster
+			comparisonDist=distance(comparisonPoint,finalCentroid[k])
+			if(comparisonDist<replacementDist)
+				replacementDist=comparisonDist
+				assignment=k
+			end
+		end
+		finalGroups[k][finalGroups[k].length]=comparisonPoint
+		for o in 0...ncluster
+			finalCentroid[o]=centroidCalc(finalGroups[o])
+		end
+
+	end
+
+	for i in 0...ncluster
+		finalGroups[i].uniq!
+	end
+	for o in 0...ncluster
+			finalCentroid[o]=centroidCalc(finalGroups[o])
+		end
+
+	largestCluster=0
+	largest=0
+	for i in 0...ncluster
+		sizeTemp=finalGroups[i].length
+		if(largestCluster<sizeTemp)
+			largest=i
+			sizeTemp=largestCluster
+		end
+	end
+
+	largestGrouping=finalGroups[largest]
+	if personX<0
+		multiplier[0]=-1
+	end
+	if personY<0
+		multiplier[1]=-1
+	end
+
+	for i in 0...largestGrouping.length
+		largestGrouping[i][0]*=multiplier[0]
+		largestGrouping[i][1]*=multiplier[1]
+	end
+
+
+	return [finalCentroid[largest],largestGrouping]
+end
 
 #======= END CENTROID STUFF
 Sequel::Model.plugin :json_serializer
