@@ -8,6 +8,7 @@ require 'sinatra/sequel'
 
 
 #======= END CENTROID STUFF
+Sequel::Model.plugin :json_serializer
 
 configure do
   DB = Sequel.connect(ENV['DATABASE_URL']);
@@ -36,9 +37,10 @@ end
 
 get '/requests/:id' do
   content_type :json
-  reqs = DB.from(:requests)
-  vendorReqs = reqs.where(:vendor => params["id"])
-  vendorReqs.to_hash.to_json
+  # reqs = DB.from(:requests)
+  # vendorReqs = reqs.where(:vendor => params["id"])
+  # vendorReqs.to_hash.to_json
+  Request.filter(:vendor => params["id"]).to_json
 end
 
 post '/requests/new' do
