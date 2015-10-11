@@ -14,6 +14,10 @@ configure do
 end
 class Link < Sequel::Model; end
 
+get '/' do
+  erb :index
+end
+
 get '/vendor/new' do
   erb :registerVendor
 end
