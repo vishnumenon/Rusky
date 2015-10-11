@@ -65,6 +65,11 @@
         max-width: 500px;
         margin: auto;
         background: none;
+        position: absolute;
+         top: 50%;
+        left: 50%;
+         transform: translate(-50%,-50%);
++        -webkit-transform: translateY(-50%,-50%);
       }
     </style>
     <script>
@@ -80,7 +85,7 @@
           });
 
           $(document).ready(function() {
-            if ($.cookie('name') == 'value') {
+            if ($.cookie('HasVisted')) {
 
               $('.bg-primary').hide();
             $('body').css("background-color","white");
@@ -91,7 +96,7 @@
           });
 
           function setCookie(){
-            $.cookie('name', 'value');
+            $.cookie('HasVisted', 'yes');
             location.reload();
           }
     </script>
