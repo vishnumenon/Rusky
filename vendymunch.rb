@@ -30,8 +30,8 @@ class Request < Sequel::Model; end
 
 get '/' do
   vendors = DB.from(:vendors)
-  allVendors = vendors.all
-  erb :index
+  allV = vendors.all
+  erb :index, :locals => {:allVendors => allV}
 end
 
 get '/vendor/new' do
