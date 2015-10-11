@@ -26,7 +26,7 @@
         //color: #34495e;
         color:white;
         text-align: center;
-        background: #e67e22;
+        background: #e74c3c;
         position: fixed;
         top: 0;
         width: 100%;
@@ -41,16 +41,15 @@
         padding-right: 20px;
         padding-top: 10px;
         padding-bottom: 10px;
-        font-size: 18px;
+        font-size: 16px;
         border-top: 1px #bdc3c7 dashed;
       }
       .voted header{
 
-        font-size: 26px;
+        font-size: 24px;
       }
-      .votedE header{
-
-        font-size: 26px;
+      .voted img{
+        width: 40px;
       }
 
       .text{
@@ -63,24 +62,27 @@
         padding-left: 20px;
         padding-right: 20px;
         max-width: 500px;
+        min-width: 300px;
         margin: auto;
         background: none;
         position: absolute;
          top: 50%;
         left: 50%;
          transform: translate(-50%,-50%);
-+        -webkit-transform: translateY(-50%,-50%);
+        -webkit-transform: translate(-50%,-50%);
       }
+        
     </style>
     <script>
 
     $(document).ready(function(){
               //$('body').css("background", "F4B350");
 
-          $('.voted' ).mouseup(function() {
-            $( this ).css( "background-color" ," #27ae60");
+          $('.voted ' ).mouseup(function() {
+            $( this ).css( "background-color" ," #e67e22");
             $( this ).css("color","white");
-              console.log("Yay");
+              getLocation();
+              //console.log("Yay");
             });
           });
 
@@ -99,6 +101,21 @@
             $.cookie('HasVisted', 'yes');
             location.reload();
           }
+        
+            var x = document.getElementById("demo");
+            
+        function getLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                } else {
+                    //x.innerHTML = "Geolocation is not supported by this browser.";
+                }
+            }
+            function showPosition(position) {
+                alert(position.coords.latitude + 
+                ", " + position.coords.longitude); 
+            }
+      
     </script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -109,7 +126,7 @@
     <![endif]-->
   </head>
   <body>
-    <div class="logo">Rusky.io</div>
+    <div class="logo">VendyMunch</div>
     <br/><br/>
 
     <div class="bg-primary" style="color: black;"> <h1 style="margin-bottom:10px; margin-top: 0; padding-top: 10px; font-size: 30px;"> A Quick How To :</h1> To request a vender to relocate near you, simply press on the vender in the list below. To cancel the request, press on the vendors name again. <br/> <br/> To view the current location of a vendor, slide the vendors name to the left. <br/><br/>
@@ -117,33 +134,57 @@
     </div>
 
     <div class="voted" i="t1">
-    <header> Rusky's Cooking </header>
-      <div class="Desc"> Quick food whereever you want. </div>
-    </div>
+            <header> Rusky's Cooking <span style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
+              <div class="Desc"> Quick food whereever you want. </div>
 
-    <div class="voted" i="t1">
-    <header> Rusky's Cooking </header>
-      <div class="Desc"> Quick food whereever you want. </div>
     </div>
+    
+        <div class="voted" i="t1">
+            <header> Rusky's Cooking <span style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
+              <div class="Desc"> Quick food whereever you want. </div>
 
-    <div class="voted" i="t1">
-    <header> Rusky's Cooking </header>
-      <div class="Desc"> Quick food whereever you want. </div>
     </div>
+    
+        <div class="voted" i="t1">
+            <header> Rusky's Cooking <span style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
+              <div class="Desc"> Quick food whereever you want. </div>
 
-    <div class="voted" i="t1">
-    <header> Rusky's Cooking </header>
-      <div class="Desc"> Quick food whereever you want. </div>
     </div>
+    
+        <div class="voted" i="t1">
+            <header> Rusky's Cooking <span style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
+              <div class="Desc"> Quick food whereever you want. </div>
 
-    <div class="voted" i="t1">
-    <header> Rusky's Cooking </header>
-      <div class="Desc"> Quick food whereever you want. </div>
     </div>
+    
+        <div class="voted" i="t1">
+            <header> Rusky's Cooking <span style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
+              <div class="Desc"> Quick food whereever you want. </div>
 
-    <div class="voted" i="t1">
-    <header> Rusky's Cooking </header>
-      <div class="Desc"> Quick food whereever you want. </div>
+    </div>
+    
+        <div class="voted" i="t1">
+            <header> Rusky's Cooking <span style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
+              <div class="Desc"> Quick food whereever you want. </div>
+
+    </div>
+    
+        <div class="voted" i="t1">
+            <header> Rusky's Cooking <span style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
+              <div class="Desc"> Quick food whereever you want. </div>
+
+    </div>
+    
+        <div class="voted" i="t1">
+            <header> Rusky's Cooking <span style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
+              <div class="Desc"> Quick food whereever you want. </div>
+
+    </div>
+    
+        <div class="voted" i="t1">
+            <header> Rusky's Cooking <span style="float:right; height: 56px; padding-left:10px;padding-right:10px;"><img src="map.png" style="margin-top: 10px;"/></span></header>
+              <div class="Desc"> Quick food whereever you want. </div>
+
     </div>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
